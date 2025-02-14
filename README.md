@@ -54,6 +54,8 @@ Upsides:
 Downsides:
 - Add an extra level on every package with no semantic rather
   than an interface is defined.
+- When importing several interfaces as they are, there are collisions
+  with names, which required aliasing the different interfaces.
 
 ## Create a base directory for the common interface
 
@@ -72,6 +74,7 @@ like the below.
 
 Upsides:
 - The package path provide some semantic `pkg/cars` and `pkg/cars/sport`.
+- No name conflicts when importing.
 
 Downsides:
 - Could be difficult to extract the common behavior for several components,
@@ -114,9 +117,12 @@ Upsides:
   is referenced with the same name as the package.
 - Could be good when auto-generating mocks, for instance, autogenerating them
   to `/internal/mocks` directory, with the same layout as the interfaces.
+- No name conflicts when importing.
 
 Downsides:
-- Add an extra level of packages for the interfaces and implementation.
+- Add an extra level of packages for the interfaces and implementation. The
+  implementations could be fixed just removing the level, but we still need
+  the level for the interfaces.
 
 ## FAQ
 
@@ -127,6 +133,6 @@ Downsides:
     transitive dependencies for being all the interfaces in the same directory
     and at some point evoke the cyclic dependencies.
 - Should I choose one strategy for the whole repository?
-  - No. The can be combined as needed in the same repository. Choose
+  - No. They can be combined as needed in the same repository. Choose
     what fit better your scenario.
 
